@@ -37,7 +37,7 @@ function goToDetails(id) {
   router.push(`/categories/${id}`);
 }
 
-onMounted(() => {
-  loadCategories();
+onMounted(async () => {
+  await loadCategories();
 });
 </script>

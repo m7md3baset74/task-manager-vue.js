@@ -30,6 +30,7 @@ export const useTaskStore = defineStore("task", () => {
     return clean;
   }
 
+  
   async function loadTasks(params = { limit: 20, offset: 0 }) {
     loading.value = true;
     error.value = null;
@@ -47,12 +48,42 @@ export const useTaskStore = defineStore("task", () => {
     }
   }
 
+
+  async function loadTasksByCategory(categoryId) {
+    loading.value = true;
+    error.value = null;
+
+    console.log("Loading tasks for category:", categoryId);
+
+    try {
+      const res = await fetchTasks({
+        category_id: categoryId,
+        limit: 100,
+        offset: 0,
+      });
+
+      console.log("API Response for category tasks:", res.data);
+
+      tasks.value = Array.isArray(res.data) ? res.data : [];
+    } catch (err) {
+      console.error("Error loading tasks by category:", err);
+      error.value = err;
+    } finally {
+      loading.value = false;
+    }
+  }
+
+
   async function loadTaskById(id) {
     loading.value = true;
     error.value = null;
 
+    console.log("Loading Task With ID:", id);
+
     try {
       const res = await getTask(id);
+
+      console.log("API Response:", res.data);
 
       if (Array.isArray(res.data)) {
         task.value = res.data[0] || null;
@@ -61,8 +92,11 @@ export const useTaskStore = defineStore("task", () => {
       } else {
         task.value = null;
       }
+
+      console.log("Stored task:", task.value);
     } catch (err) {
       error.value = err;
+      console.error("Error loading task:", err);
     } finally {
       loading.value = false;
     }
@@ -109,6 +143,7 @@ export const useTaskStore = defineStore("task", () => {
     }
   }
 
+  
   async function deleteTask(id) {
     loading.value = true;
     error.value = null;
@@ -124,12 +159,14 @@ export const useTaskStore = defineStore("task", () => {
     }
   }
 
+  
   return {
     tasks,
     task,
     loading,
     error,
     loadTasks,
+    loadTasksByCategory,
     loadTaskById,
     addTask,
     editTask,

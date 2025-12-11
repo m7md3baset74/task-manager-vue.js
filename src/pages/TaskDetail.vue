@@ -3,11 +3,11 @@
     <div class="max-w-3xl mx-auto">
 
       <!-- Back -->
-      <div class="mb-4 flex gap-4 text-[#570024]">
-        <button @click="goBack" class="px-3 py-2 rounded border hover:bg-[#570024]/5">
+      <div class="mb-4 flex gap-4">
+        <button @click="goBack" class="px-3 py-2 border bg-[#570024] text-white rounded-lg shadow hover:bg-[#6d0030]">
           ← Back to list
         </button>
-        <button @click="showCate" class="px-3 py-2 rounded border hover:bg-[#570024]/5">
+        <button @click="showCate" class="px-3 py-2 rounded-lg border hover:bg-[#570024]/5 text-[#570024] shadow">
           Show All Categories
         </button>
       </div>

@@ -7,4 +7,4 @@ export const fetchCategoryById = (id) =>
   apiClient.get(`/categories?id=eq.${id}`);
 
 export const fetchTasksByCategory = (categoryId) =>
-  apiClient.get(`/tasks?category_id=eq.1&limit=20&offset=0${categoryId}&order=created_at.desc`);
+  apiClient.get(`/tasks?category_id=eq.${categoryId}&order=created_at.desc`);

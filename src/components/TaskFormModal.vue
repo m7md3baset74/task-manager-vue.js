@@ -5,24 +5,20 @@
   >
     <!-- Modal Box -->
     <div
-      class="bg-white/90 rounded-xl shadow-lg w-full max-w-[90%] sm:max-w-xl p-4 sm:p-6 animate-fade-in "
+      class="bg-white/90 rounded-xl shadow-lg w-full max-w-[90%] sm:max-w-xl p-4 sm:p-6 animate-fade-in"
     >
       <!-- Header -->
       <div class="flex justify-between items-center mb-4">
         <h2 class="text-xl font-semibold">
           {{ isEdit ? "Edit Task" : "Add New Task" }}
         </h2>
-        <button
-          @click="close"
-          class="text-gray-500 hover:text-black text-xl"
-        >
+        <button @click="close" class="text-gray-500 hover:text-black text-xl">
           ✕
         </button>
       </div>
 
       <!-- Form -->
       <form @submit.prevent="submitForm" class="space-y-4">
-
         <!-- Title -->
         <div>
           <label class="block text-sm font-medium mb-1">Title</label>
@@ -31,7 +27,9 @@
             type="text"
             class="w-full border rounded px-3 py-2 focus:ring focus:ring-[#570024]"
           />
-          <p v-if="errors.title" class="text-red-600 text-sm">{{ errors.title }}</p>
+          <p v-if="errors.title" class="text-red-600 text-sm">
+            {{ errors.title }}
+          </p>
         </div>
 
         <!-- Description -->
@@ -47,20 +45,60 @@
         <!-- Category -->
         <div>
           <label class="block text-sm font-medium mb-1">Category</label>
-          <select
-            v-model="form.category_id"
-            class="w-full border rounded px-3 py-2"
-          >
-            <option disabled :value="null">Select Category</option>
-            <option
-              v-for="c in categoryStore.categories"
-              :key="c.id"
-              :value="c.id"
-            >
-              {{ c.name }}
-            </option>
-          </select>
-          <p v-if="errors.category_id" class="text-red-600 text-sm">{{ errors.category_id }}</p>
+
+          <Listbox v-model="form.category_id">
+            <div class="relative mt-1">
+              <!-- Button -->
+              <ListboxButton
+                class="relative w-full cursor-pointer border rounded px-3 py-2 text-left focus:outline-none focus:ring focus:ring-[#570024]"
+              >
+                <span class="block truncate">
+                  {{
+                    categoryStore.categories.find(
+                      (c) => c.id === form.category_id
+                    )?.name || "Select Category"
+                  }}
+                </span>
+              </ListboxButton>
+
+              <!-- Options -->
+              <Transition
+                enter="transition ease-out duration-100"
+                enter-from="transform opacity-0 scale-95"
+                enter-to="transform opacity-100 scale-100"
+                leave="transition ease-in duration-75"
+                leave-from="transform opacity-100 scale-100"
+                leave-to="transform opacity-0 scale-95"
+              >
+                <ListboxOptions
+                  class="absolute mt-1 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm z-50"
+                >
+                  <ListboxOption
+                    v-for="c in categoryStore.categories"
+                    :key="c.id"
+                    :value="c.id"
+                    class="{ 'text-white bg-[#570024]': active, 'text-gray-900': !active } relative cursor-pointer select-none py-2 pl-3 pr-9 hover:bg-[#f3d4e0]"
+                    v-slot="{ active, selected }"
+                  >
+                    <span
+                      :class="{
+                        'font-bold': selected,
+                        'font-normal': !selected,
+                      }"
+                      class="block truncate"
+                    >
+                      {{ c.name }}
+                    </span>
+                    
+                  </ListboxOption>
+                </ListboxOptions>
+              </Transition>
+            </div>
+          </Listbox>
+
+          <p v-if="errors.category_id" class="text-red-600 text-sm">
+            {{ errors.category_id }}
+          </p>
         </div>
 
         <!-- Priority -->
@@ -74,7 +112,9 @@
             <option value="medium">Medium</option>
             <option value="high">High</option>
           </select>
-          <p v-if="errors.priority" class="text-red-600 text-sm">{{ errors.priority }}</p>
+          <p v-if="errors.priority" class="text-red-600 text-sm">
+            {{ errors.priority }}
+          </p>
         </div>
 
         <!-- Completed (only in edit mode) -->
@@ -110,6 +150,13 @@
 import { reactive, computed, watch, onMounted } from "vue";
 import { useTaskStore } from "../stores/taskStore";
 import { useCategoryStore } from "../stores/categoryStore";
+import {
+  Listbox,
+  ListboxButton,
+  ListboxOptions,
+  ListboxOption,
+} from "@headlessui/vue";
+import { Transition } from "vue";
 
 const props = defineProps({
   open: Boolean,
@@ -166,7 +213,6 @@ watch(
   { immediate: true }
 );
 
-
 // ----------------------------
 //       VALIDATION LOGIC
 // ----------------------------
@@ -204,7 +250,6 @@ function validateForm() {
   return valid;
 }
 
-
 // ----------------------------
 //         SUBMIT
 // ----------------------------
@@ -229,7 +274,6 @@ function close() {
 }
 </script>
 
-
 <style>
 @keyframes fade-in {
   from {
@@ -242,6 +286,6 @@ function close() {
   }
 }
 .animate-fade-in {
-  animation: fade-in 0.40s ease-out;
+  animation: fade-in 0.4s ease-out;
 }
 </style>
