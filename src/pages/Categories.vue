@@ -3,7 +3,7 @@
     <h1 class="text-3xl font-bold mb-6 text-[#570024] text-center">All Categories.</h1>
 
     <!-- Loading -->
-    <div v-if="loading" class="text-lg">جار التحميل...</div>
+    <div v-if="loading" class="text-lg">Loading...</div>
 
     <!-- Error -->
     <div v-if="error" class="text-red-500">{{ error.message }}</div>

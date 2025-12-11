@@ -46,7 +46,7 @@
           @click="applyFilters" 
           class="px-3 py-2 bg-[#570024] hover:bg-[#6e2944] text-white rounded"
         >
-          Apply
+          Filter Apply
         </button>
 
         <button 
