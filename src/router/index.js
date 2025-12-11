@@ -16,7 +16,6 @@ const routes = [
   { path: '/categories/:id', name: 'categoryDetails', component: () => import('../pages/CategoryDetails.vue') },
 
   { path: '/tasks/:id', name: 'TaskDetail', component: () => import('../pages/TaskDetail.vue'), props: true },
-  { path: '/tasks/:id/edit', name: 'TaskEdit', component: () => import('../pages/TaskForm.vue'), props: true },
 ];
 
 const router = createRouter({
