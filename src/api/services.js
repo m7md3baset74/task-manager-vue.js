@@ -1,4 +1,4 @@
-import api from './supabaseClient';
+import api from './apiClient.js';
 
 export async function fetchServices() {
   return api.get('/services?select=*');
