@@ -103,7 +103,7 @@
                   @click="toggleComplete"
                   class="px-3 py-1 rounded border"
                 >
-                  {{ task.completed ? "Mark Incomplete" : "Mark Complete" }}
+                  {{ task.completed ? 'Unmark' : 'Done ✔' }}
                 </button>
 
                 <div class="flex justify-end gap-2 mt-2 md:mt-3 flex-wrap">
@@ -192,9 +192,14 @@ const errorMessage = computed(() => {
   return error.value.message || String(error.value);
 });
 
-const category = computed(
-  () => categoryStore.categories.find((c) => c.id === task?.category_id) || null
-);
+const category = computed(() => {
+  if (!task.value || !task.value.category_id) return null;
+
+  return categoryStore.categories.find(
+    (c) => c.id === task.value.category_id
+  ) || null;
+});
+
 
 function formatDate(iso) {
   if (!iso) return "";

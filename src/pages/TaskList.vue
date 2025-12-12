@@ -4,8 +4,8 @@
      <div>
        <button
          @click="openAddModal"
-         class="fixed bottom-6 right-6 w-10 h-10 z-10 bg-white/60 hover:bg-[#570024] hover:text-white text-[#570024] rounded-full shadow-xl 
-         flex items-center justify-center text-3xl hover:scale-110 transition-all ring-2 ring-[#570024]"
+         class="fixed bottom-6 right-6 w-10 h-10 z-10 bg-white/60 hover:bg-[#570024] hover:text-white text-[#570024] 
+         rounded-full shadow-xl flex items-center justify-center text-2xl hover:scale-120 transition-all ring-2 ring-[#570024]"
        >
        +
      </button>

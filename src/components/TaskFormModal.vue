@@ -117,9 +117,10 @@
         </div>
 
         <!-- Completed (only in edit mode) -->
-        <div v-if="isEdit">
+        <div v-if="isEdit" >
           <label class="flex items-center gap-2 text-sm font-medium">
-            <input type="checkbox" v-model="form.completed" />
+            <input type="checkbox" 
+            v-model="form.completed" />
             Mark as completed
           </label>
         </div>
@@ -289,6 +290,6 @@ function close() {
   }
 }
 .animate-fade-in {
-  animation: fade-in 0.4s ease-out;
+  animation: fade-in 0.3s ease-out;
 }
 </style>
