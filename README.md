@@ -28,7 +28,7 @@ VITE_SUPABASE_PROJECT_ID=your-project-id
 VITE_SUPABASE_ANON_KEY=your-anon-key
 VITE_API_BASE_URL=https://your-api.com/api
 
-
+-----------------------------------------------------
 
 🏛 2. State Management (Pinia)
 
@@ -61,6 +61,7 @@ Storing categories globally
 
 Both stores communicate with the backend via /api/tasks and /api/categories.
 
+-----------------------------------------------------
 🧩 3. Component Architecture
 src/
  ├─ api/              → API functions (tasks & categories)
@@ -87,7 +88,7 @@ src/
  ├─ App.vue
  └─ main.js
 
-
+-----------------------------------------------------
  ⭐ 4. Features Implemented
 ✅ Core Features
 
@@ -119,7 +120,7 @@ Clean component architecture
 
 Global loading & error state in stores
 
-
+-----------------------------------------------------
 
 ⚠️ 5. Known Limitations
 
@@ -129,20 +130,39 @@ API must follow the exact structure expected by the stores (id, title, descripti
 
 No pagination implemented (although supported in API)
 
-🖼 6. Screenshots
+-----------------------------------------------------
 
-ضيف الصور بنفسك هنا — حط مسار كل صورة بدل النص المكتوب 👇
+## 📸 6. Screenshots, decktop and mobile
 
-Home Screen
+> ضع صور الشاشات داخل المسار التالي:  
+> **public/screenshots/**  
+> مع الحفاظ على نفس أسماء الملفات المذكورة بالأسفل أو تغييرها وتحديث الروابط.
 
-Task Details
+### 🏠 Home Page
+![Home Page](public/screenshots/home.png)
+![Home Page Mobile](public/screenshots/home.mobile.png)
 
-Category Tasks
+### 📂 Categories List
+![Categories List](public/screenshots/c.list.png)
+![Categories List Mobile](public/screenshots/c.list.mobile.png)
 
-Add Task Modal
+### 📄 Category Details
+![Category Details](public/screenshots/c.details.png)
+![Category Details Mobile](public/screenshots/c.details.mobile.png)
 
-Delete Confirmation
+### ✅ Task Details
+![Task Details](public/screenshots/t.details.png)
+![Task Details Mobile](public/screenshots/t.details.mobile.png)
 
+### ➕ Add / Edit Task Modal
+![Task Modal](public/screenshots/modal.png)
+![Task Modal Mobile](public/screenshots/modal.mobile.png)
+
+### ❌ Delete Confirmation
+![Delete Confirm](public/screenshots/delete.png)
+![Delete Confirm Mobile](public/screenshots/delete.mobile.png)
+
+-----------------------------------------------------
 
 
 👨‍💻 7. Developer
