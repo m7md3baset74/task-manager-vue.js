@@ -2,7 +2,7 @@
   <div class="min-h-screen p-4">
 
     <!-- Back Button -->
-    <div class="mb-4">
+    <div class="mb-2">
       <button
         @click="$router.back()"
         class="px-4 py-2 bg-[#570024] text-white rounded-lg shadow hover:bg-[#6d0030]"
@@ -11,7 +11,7 @@
       </button>
     </div>
 
-    <h2 class="text-2xl font-bold text-white mb-4">
+    <h2 class="text-3xl font-bold text-[#570024] mb-6 text-center">
       Tasks in "{{ category?.name }}"
     </h2>
 

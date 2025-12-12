@@ -1,11 +1,24 @@
 <template>
   <div class="min-h-screen p-6 bg-gray-50">
+    <!-- Floating Add Button -->
+     <div>
+       <button
+         @click="openAddModal"
+         class="fixed bottom-6 right-6 w-10 h-10 z-10 bg-white/60 hover:bg-[#570024] hover:text-white text-[#570024] rounded-full shadow-xl 
+         flex items-center justify-center text-3xl hover:scale-110 transition-all ring-2 ring-[#570024]"
+       >
+       +
+     </button>
+     </div>
     <div class="max-w-5xl mx-auto">
-      
       <!-- Header -->
       <header class="flex items-center justify-between mb-6">
-        <h1 class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#570024] to-[#ff5353]">Tasks.</h1>
-        <button 
+        <h1
+          class="text-4xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-[#570024] to-[#ff5353]"
+        >
+          Tasks.
+        </h1>
+        <button
           @click="openAddModal"
           class="px-4 py-2 bg-[#570024] hover:bg-[#6e2944] text-white rounded"
         >
@@ -15,42 +28,44 @@
 
       <!-- Filters -->
       <div class="flex flex-wrap gap-3 items-center mb-4">
-        <select v-model="filters.category_id" class="border text-white border-[#c97d7d] rounded px-3 py-2 
-        bg-[#c97d7d] hover:bg-[#b86464]">
+        <select
+          v-model="filters.category_id"
+          class="border text-white border-[#c97d7d] rounded px-3 py-2 bg-[#c97d7d] hover:bg-[#b86464]"
+        >
           <option :value="null">All Categories</option>
-          <option 
-            v-for="c in categories" 
-            :key="c.id" 
-            :value="c.id"
-          >
+          <option v-for="c in categories" :key="c.id" :value="c.id">
             {{ c.name }}
           </option>
         </select>
 
-        <select v-model="filters.completed" class="border text-white border-[#c97d7d] rounded px-3 py-2 
-        bg-[#c97d7d] hover:bg-[#b86464]">
+        <select
+          v-model="filters.completed"
+          class="border text-white border-[#c97d7d] rounded px-3 py-2 bg-[#c97d7d] hover:bg-[#b86464]"
+        >
           <option :value="null">All</option>
           <option :value="false">Incomplete</option>
           <option :value="true">Completed</option>
         </select>
 
-        <select v-model="filters.priority" class="border text-white border-[#c97d7d] rounded px-3 py-2 
-        bg-[#c97d7d] hover:bg-[#b86464]">
+        <select
+          v-model="filters.priority"
+          class="border text-white border-[#c97d7d] rounded px-3 py-2 bg-[#c97d7d] hover:bg-[#b86464]"
+        >
           <option :value="null">All Priorities</option>
           <option value="low">Low</option>
           <option value="medium">Medium</option>
           <option value="high">High</option>
         </select>
 
-        <button 
-          @click="applyFilters" 
+        <button
+          @click="applyFilters"
           class="px-3 py-2 bg-[#570024] hover:bg-[#6e2944] text-white rounded"
         >
           Filter Apply
         </button>
 
-        <button 
-          @click="resetFilters" 
+        <button
+          @click="resetFilters"
           class="px-3 py-2 border rounded hover:bg-gray-200"
         >
           Reset
@@ -63,20 +78,17 @@
       </div>
 
       <div v-else-if="categoryError || error">
-        <ErrorState 
-          :message="categoryErrorMessage || errorMessage" 
-          @retry="loadAll" 
+        <ErrorState
+          :message="categoryErrorMessage || errorMessage"
+          @retry="loadAll"
         />
       </div>
 
       <!-- Tasks List -->
       <div v-else>
         <div v-if="tasks.length === 0" class="p-8 text-center text-gray-500">
-          No tasks yet. 
-          <button 
-            @click="openAddModal" 
-            class="text-blue-600 underline"
-          >
+          No tasks yet.
+          <button @click="openAddModal" class="text-blue-600 underline">
             Create your first task
           </button>
         </div>
@@ -93,9 +105,9 @@
 
         <!-- Pagination -->
         <div class="mt-6 flex justify-center">
-          <button 
-            @click="loadMore" 
-            class="px-4 py-2 border rounded text-[#570024] hover:bg-[#570024]/5" 
+          <button
+            @click="loadMore"
+            class="px-4 py-2 border rounded text-[#570024] hover:bg-[#570024]/5"
             :disabled="loading"
           >
             Load more
@@ -104,11 +116,11 @@
       </div>
 
       <!-- Task Modal -->
-      <TaskFormModal 
+      <TaskFormModal
         v-if="modalOpen"
         :open="modalOpen"
         :task-data="editData"
-        @close="modalOpen=false"
+        @close="modalOpen = false"
         @saved="handleSaved"
       />
     </div>
@@ -116,15 +128,15 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue';
-import TaskCard from '../components/TaskCard.vue';
-import LoadingSkeleton from '../components/LoadingSkeleton.vue';
-import ErrorState from '../components/ErrorState.vue';
-import TaskFormModal from '../components/TaskFormModal.vue';
+import { onMounted, ref } from "vue";
+import TaskCard from "../components/TaskCard.vue";
+import LoadingSkeleton from "../components/LoadingSkeleton.vue";
+import ErrorState from "../components/ErrorState.vue";
+import TaskFormModal from "../components/TaskFormModal.vue";
 
-import { useTaskStore } from '../stores/taskStore';
-import { useCategoryStore } from '../stores/categoryStore';
-import { storeToRefs } from 'pinia';
+import { useTaskStore } from "../stores/taskStore";
+import { useCategoryStore } from "../stores/categoryStore";
+import { storeToRefs } from "pinia";
 
 const taskStore = useTaskStore();
 const categoryStore = useCategoryStore();
@@ -135,14 +147,14 @@ const error = ref(null);
 const filters = ref({
   category_id: null,
   completed: null,
-  priority: null
+  priority: null,
 });
 
 const modalOpen = ref(false);
 const editData = ref(null);
 
 function openAddModal() {
-console.log("Open Add Modal Clicked");
+  console.log("Open Add Modal Clicked");
 
   editData.value = null;
   modalOpen.value = true;
@@ -163,10 +175,14 @@ async function loadAll() {
   error.value = null;
 
   try {
-    console.log('Loading categories...');
+    console.log("Loading categories...");
     await categoryStore.loadCategories();
-    console.log('Loaded categories:', categoryStore.categories);
-    await taskStore.loadTasks({ limit: 20, offset: 0, order: "created_at.desc" });
+    console.log("Loaded categories:", categoryStore.categories);
+    await taskStore.loadTasks({
+      limit: 20,
+      offset: 0,
+      order: "created_at.desc",
+    });
   } catch (err) {
     error.value = err;
   } finally {
@@ -180,33 +196,29 @@ async function applyFilters() {
   try {
     console.log("FILTERS:", filters.value);
 
-    const params = { 
-      limit: 20, 
-      offset: 0, 
-      order: "created_at.desc" 
+    const params = {
+      limit: 20,
+      offset: 0,
+      order: "created_at.desc",
     };
 
     if (filters.value.category_id !== null)
-      params.category_id = filters.value.category_id;        // رقم فقط
+      params.category_id = filters.value.category_id; // رقم فقط
 
     if (filters.value.completed !== null)
-      params.completed = filters.value.completed;            // true/false
+      params.completed = filters.value.completed; // true/false
 
-    if (filters.value.priority)
-      params.priority = filters.value.priority;              // medium/high/low
+    if (filters.value.priority) params.priority = filters.value.priority; // medium/high/low
 
     console.log("PARAMS SENT:", params);
 
     await taskStore.loadTasks(params);
-
   } catch (err) {
     error.value = err;
   } finally {
     loading.value = false;
   }
 }
-
-
 
 async function resetFilters() {
   filters.value = { category_id: null, completed: null, priority: null };
@@ -236,8 +248,16 @@ async function toggleComplete(task) {
 
 onMounted(loadAll);
 
-const { tasks, loading: taskLoading, error: taskError } = storeToRefs(taskStore);
-const { categories, loading: categoryLoading, error: categoryError } = storeToRefs(categoryStore);
+const {
+  tasks,
+  loading: taskLoading,
+  error: taskError,
+} = storeToRefs(taskStore);
+const {
+  categories,
+  loading: categoryLoading,
+  error: categoryError,
+} = storeToRefs(categoryStore);
 
 const categoryErrorMessage = categoryError?.message;
 const errorMessage = error?.message;

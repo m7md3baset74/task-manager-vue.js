@@ -89,7 +89,6 @@
                     >
                       {{ c.name }}
                     </span>
-                    
                   </ListboxOption>
                 </ListboxOptions>
               </Transition>
@@ -157,6 +156,8 @@ import {
   ListboxOption,
 } from "@headlessui/vue";
 import { Transition } from "vue";
+import { toast } from "vue3-toastify";
+import "vue3-toastify/dist/index.css";
 
 const props = defineProps({
   open: Boolean,
@@ -213,9 +214,6 @@ watch(
   { immediate: true }
 );
 
-// ----------------------------
-//       VALIDATION LOGIC
-// ----------------------------
 function validateForm() {
   let valid = true;
 
@@ -250,9 +248,6 @@ function validateForm() {
   return valid;
 }
 
-// ----------------------------
-//         SUBMIT
-// ----------------------------
 async function submitForm() {
   if (!validateForm()) return;
 
@@ -262,6 +257,14 @@ async function submitForm() {
     } else {
       await taskStore.addTask({ ...form });
     }
+
+    toast.success(
+      isEdit.value ? "Task updated successfully!" : "Task added successfully!",
+      {
+        autoClose: 2000,
+      }
+    );
+
     emit("saved");
     close();
   } catch (err) {
