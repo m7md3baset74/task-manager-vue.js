@@ -134,10 +134,6 @@ No pagination implemented (although supported in API)
 
 ## 📸 6. Screenshots, decktop and mobile
 
-> ضع صور الشاشات داخل المسار التالي:  
-> **public/screenshots/**  
-> مع الحفاظ على نفس أسماء الملفات المذكورة بالأسفل أو تغييرها وتحديث الروابط.
-
 ### 🏠 Home Page
 ![Home Page](public/screenshots/home.png)
 ![Home Page Mobile](public/screenshots/home.mobile.png)
