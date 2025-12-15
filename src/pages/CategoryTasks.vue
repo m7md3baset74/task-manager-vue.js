@@ -15,9 +15,8 @@
       Tasks in "{{ category?.name }}"
     </h2>
 
-    <!-- If no tasks -->
-    <div v-if="tasks.length === 0" class="text-gray-400 text-center mt-10">
-      No tasks found in this category.
+    <div v-if="loading" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <LoadingSkeleton v-for="i in 6" :key="i" />
     </div>
 
     <!-- Grid -->
@@ -99,6 +98,8 @@ import { onMounted, computed } from "vue";
 import { useRoute } from "vue-router";
 import { useTaskStore } from "../stores/taskStore";
 import { useCategoryStore } from "../stores/categoryStore";
+import LoadingSkeleton from "../components/LoadingSkeleton.vue";
+import { storeToRefs } from "pinia";
 
 const route = useRoute();
 const taskStore = useTaskStore();
@@ -114,13 +115,17 @@ const category = computed(() =>
   categoryStore.categories.find((c) => c.id === categoryId)
 );
 
+const {loading} = storeToRefs(taskStore)
+
 function toggleComplete(task) {
   taskStore.editTask(task.id, { completed: !task.completed });
 }
 
-onMounted(() => {
-  taskStore.loadTasks({ category_id: categoryId });
-  categoryStore.loadCategoryById(categoryId);
+onMounted(async() => {
+    if (categoryStore.categories.length === 0) {
+        await categoryStore.loadCategories();
+    }
+    await taskStore.loadTasks({ category_id: categoryId });
 });
 </script>
 

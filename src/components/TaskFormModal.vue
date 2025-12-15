@@ -1,11 +1,18 @@
 <template>
+  <FocusTrap>
   <div
     v-if="open"
     class="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-xs transition-opacity text-[#570024]"
+    tabindex="-1"
+    @keydown.esc="close"
   >
     <!-- Modal Box -->
+     
     <div
       class="bg-white/90 rounded-xl shadow-lg w-full max-w-[90%] sm:max-w-xl p-4 sm:p-6 animate-fade-in"
+      @click.stop
+      role="dialog"
+      aria-modal="true"
     >
       <!-- Header -->
       <div class="flex justify-between items-center mb-4">
@@ -23,8 +30,10 @@
         <div>
           <label class="block text-sm font-medium mb-1">Title</label>
           <input
+            ref="titleInput"
             v-model="form.title"
             type="text"
+            autofocus
             class="w-full border rounded px-3 py-2 focus:ring focus:ring-[#570024]"
           />
           <p v-if="errors.title" class="text-red-600 text-sm">
@@ -144,10 +153,11 @@
       </form>
     </div>
   </div>
+  </FocusTrap>
 </template>
 
 <script setup>
-import { reactive, computed, watch, onMounted } from "vue";
+import { reactive, computed, watch, onMounted, nextTick, ref, onUnmounted } from "vue";
 import { useTaskStore } from "../stores/taskStore";
 import { useCategoryStore } from "../stores/categoryStore";
 import {
@@ -159,6 +169,7 @@ import {
 import { Transition } from "vue";
 import { toast } from "vue3-toastify";
 import "vue3-toastify/dist/index.css";
+import { FocusTrap } from "@headlessui/vue";
 
 const props = defineProps({
   open: Boolean,
@@ -194,6 +205,8 @@ const errors = reactive({
   priority: "",
 });
 
+const titleInput = ref(null);
+
 // Fill form when editing
 watch(
   () => props.taskData,
@@ -214,6 +227,30 @@ watch(
   },
   { immediate: true }
 );
+
+function handleKeydown(e) {
+  if (e.key === "Escape") {
+    close();
+  }
+}
+
+watch(
+  () => props.open,
+  async (isOpen) => {
+    if (isOpen) {
+      await nextTick();
+      titleInput.value?.focus();
+      window.addEventListener("keydown", handleKeydown);
+    } else {
+      window.removeEventListener("keydown", handleKeydown);
+    }
+  }
+);
+
+onUnmounted(() => {
+  window.removeEventListener("keydown", handleKeydown);
+});
+
 
 function validateForm() {
   let valid = true;

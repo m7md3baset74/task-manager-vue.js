@@ -3,7 +3,9 @@
     <h1 class="text-3xl font-bold mb-6 text-[#570024] text-center">All Categories.</h1>
 
     <!-- Loading -->
-    <div v-if="loading" class="text-lg">Loading...</div>
+    <div v-if="loading" class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <LoadingSkeleton v-for="i in 3" :key="i" />
+    </div>
 
     <!-- Error -->
     <div v-if="error" class="text-red-500">{{ error.message }}</div>
@@ -27,11 +29,13 @@
 import { onMounted } from 'vue';
 import { useCategoryStore } from '../stores/categoryStore';
 import { useRouter } from 'vue-router';
+import { storeToRefs } from 'pinia';
+import LoadingSkeleton from '../components/LoadingSkeleton.vue';
 
 const router = useRouter();
 const store = useCategoryStore();
-
-const { categories, loading, error, loadCategories } = store;
+const { categories, loading, error } = storeToRefs(store);
+const { loadCategories } = store;
 
 function goToDetails(id) {
   router.push(`/categories/${id}`);

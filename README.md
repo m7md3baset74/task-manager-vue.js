@@ -120,6 +120,14 @@ Clean component architecture
 
 Global loading & error state in stores
 
+### Keyboard Navigation Support
+- Full keyboard accessibility using native HTML elements.
+- Users can navigate using Tab key across buttons, inputs, and cards.
+- Modals support:
+- Enter to submit actions
+- Esc to close modals
+- Automatic focus on the first input when opening forms.
+
 -----------------------------------------------------
 
 ⚠️ 5. Known Limitations
