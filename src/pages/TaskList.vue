@@ -20,7 +20,7 @@
         </h1>
         <button
           @click="openAddModal"
-          class="px-4 py-2 bg-[#570024] hover:bg-[#6e2944] text-white rounded"
+          class="px-4 py-2 bg-[#570024] hover:bg-[#6d0030] text-white rounded"
         >
           + Add Task
         </button>
@@ -59,14 +59,14 @@
 
         <button
           @click="applyFilters"
-          class="px-3 py-2 bg-[#570024] hover:bg-[#6e2944] text-white rounded"
+          class="px-3 py-2 bg-[#570024] hover:bg-[#6d0030] text-white rounded"
         >
           Filter Apply
         </button>
 
         <button
           @click="resetFilters"
-          class="px-3 py-2 border rounded hover:bg-gray-200"
+          class="px-3 py-2 border rounded hover:bg-[#efeeeb]"
         >
           Reset
         </button>

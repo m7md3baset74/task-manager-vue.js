@@ -145,7 +145,7 @@
           </button>
           <button
             type="submit"
-            class="px-4 py-2 bg-[#570024] hover:bg-[#6e2944] text-white rounded"
+            class="px-4 py-2 bg-[#570024] hover:bg-[#6d0030] text-white rounded"
           >
             {{ isEdit ? "Save Changes" : "Add Task" }}
           </button>
