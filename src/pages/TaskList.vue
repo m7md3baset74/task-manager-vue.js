@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen p-6 bg-gray-50">
+  <div class="min-h-screen p-6">
     <!-- Floating Add Button -->
      <div>
        <button
@@ -66,7 +66,7 @@
 
         <button
           @click="resetFilters"
-          class="px-3 py-2 border rounded hover:bg-[#efeeeb]"
+          class="px-3 py-2 border rounded hover:bg-[#570024]/5"
         >
           Reset
         </button>

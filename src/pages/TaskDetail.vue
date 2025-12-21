@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen p-6 bg-gray-50">
+  <div class="min-h-screen p-6">
     <div class="max-w-3xl mx-auto">
       <!-- Back -->
       <div class="mb-4 flex gap-4">

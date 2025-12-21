@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen p-4">
+  <div class="min-h-screen p-6">
 
     <!-- Back Button -->
     <div class="mb-2">

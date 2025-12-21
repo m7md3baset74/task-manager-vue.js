@@ -1,5 +1,16 @@
 <template>
   <div class="p-6 text-[#570024]">
+
+    <!-- Back Button -->
+    <div class="mb-2">
+      <button
+        @click="$router.back()"
+        class="px-4 py-2 bg-[#570024] text-white rounded-lg shadow hover:bg-[#6d0030]"
+      >
+        ← Back
+      </button>
+    </div>
+    
     <h1 class="text-3xl font-bold mb-6 text-[#570024] text-center">All Categories.</h1>
 
     <!-- Loading -->
