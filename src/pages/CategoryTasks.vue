@@ -81,12 +81,6 @@
             View
           </router-link>
 
-          <button
-            @click="toggleComplete(task)"
-            class="px-3 py-1 text-white border rounded"
-          >
-            {{ task.completed ? "Unmark" : "Done ✔" }}
-          </button>
         </div>
       </div>
     </div>
